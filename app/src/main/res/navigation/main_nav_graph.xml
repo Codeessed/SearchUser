@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.searchuser.presentation.screens.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchDetailsFragment"
+            app:destination="@id/searchDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchDetailsFragment"
+        android:name="com.example.searchuser.presentation.screens.SearchDetailsFragment"
+        android:label="SearchDetailsFragment" >
+        <argument
+            android:name="searchDetails"
+            app:argType="com.example.searchuser.data.response.Item" />
+    </fragment>
 </navigation>

@@ -116,7 +116,8 @@ class SearchFragment: Fragment(), OnClickListener {
     }
 
     override fun onItemClicked(item: Item) {
-//        findNavController().navigate()
+        val action = SearchFragmentDirections.actionSearchFragmentToSearchDetailsFragment(item)
+        findNavController().navigate(action)
     }
 
 }
