@@ -52,6 +52,9 @@ dependencies {
     //coil
     implementation("io.coil-kt:coil:2.1.0")
 
+    //pagination
+    implementation "androidx.paging:paging-runtime-ktx:3.2.0-alpha04"
+
     //navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0-alpha07'
     implementation 'androidx.navigation:navigation-ui-ktx:2.6.0-alpha07'
