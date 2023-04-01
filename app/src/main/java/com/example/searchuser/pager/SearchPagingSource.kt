@@ -6,12 +6,13 @@ import com.example.searchuser.data.SearchApi
 import com.example.searchuser.data.response.Item
 
 class SearchPagingSource(
+    private val query: String,
     private val search: SearchApi
 ): PagingSource<Int, Item>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
-        val pageNumber = params.key ?: 1
+        var pageNumber = params.key ?: 1
         return try {
-            val response = search.searchUser("make")
+            val response = search.searchUser(query, pageNumber, 10)
             val pagedResponse = response.body()
             val data = pagedResponse?.items
 
@@ -28,6 +29,6 @@ class SearchPagingSource(
     }
 
     override fun getRefreshKey(state: PagingState<Int, Item>): Int? {
-        TODO("Not yet implemented")
+        return null
     }
 }

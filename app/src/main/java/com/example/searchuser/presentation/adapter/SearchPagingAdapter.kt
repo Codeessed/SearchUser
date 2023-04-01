@@ -3,8 +3,7 @@ package com.example.searchuser.presentation.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -13,11 +12,10 @@ import com.example.searchuser.data.response.Item
 import com.example.searchuser.databinding.SearchItemBinding
 import com.example.searchuser.utils.OnClickListener
 
-class SearchAdapter(private val onClickListenerInterface: OnClickListener, private val context: Context): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchPagingAdapter(private val onClickListenerInterface: OnClickListener, private val context: Context): PagingDataAdapter<Item, SearchPagingAdapter.SearchViewHolder>(SearchComparator) {
 
     inner class SearchViewHolder(private val binding: SearchItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(position: Int, context: Context){
-            val search = differ.currentList[position]
+        fun bind(position: Int, search: Item){
             binding.searchItemLogin.text = search.login
             binding.searchItemEventUrl.text = search.events_url
             binding.searchItemImg.load(search.avatar_url){
@@ -36,15 +34,12 @@ class SearchAdapter(private val onClickListenerInterface: OnClickListener, priva
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        return holder.bind(position, context)
+        getItem(position)?.let {
+            holder.bind(position, it)
+        }
     }
 
-
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
-
-    var differList = object : DiffUtil.ItemCallback<Item>(){
+    object SearchComparator : DiffUtil.ItemCallback<Item>(){
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem.id == newItem.id
         }
@@ -54,5 +49,4 @@ class SearchAdapter(private val onClickListenerInterface: OnClickListener, priva
         }
     }
 
-    val differ = AsyncListDiffer(this, differList)
 }

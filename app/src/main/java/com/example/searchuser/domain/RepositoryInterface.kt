@@ -6,6 +6,6 @@ import com.example.searchuser.utils.Resource
 
 interface RepositoryInterface {
 
-    suspend fun searchUsers(query: String): Resource<SearchUserResponse>
+    suspend fun searchUsers(query: String, per_page: Int?): Resource<SearchUserResponse>
 
 }

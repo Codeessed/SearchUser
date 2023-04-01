@@ -31,7 +31,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SearchFragment: Fragment(), OnClickListener {
+class SearchDetailsFragment: Fragment(), OnClickListener {
 
 
     private var _binding: FragmentSearchBinding? = null

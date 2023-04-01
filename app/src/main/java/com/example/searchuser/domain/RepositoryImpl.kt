@@ -11,9 +11,9 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(
     private val searchApi: SearchApi
 ): RepositoryInterface {
-    override suspend fun searchUsers(query: String): Resource<SearchUserResponse> {
+    override suspend fun searchUsers(query: String, per_page: Int?): Resource<SearchUserResponse> {
         return try {
-            val response = searchApi.searchUser(query)
+            val response = searchApi.searchUser(query, 1, 10)
             when(response.code()){
                 in 200..299 -> {
                     Resource.Success(response.body()!!)
