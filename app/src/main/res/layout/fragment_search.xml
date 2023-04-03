@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:placeholderText="User"
+            app:placeholderText="Search user"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/search_text"
@@ -45,6 +45,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/search_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Input search query and click the search button to show results"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recycler"
@@ -76,9 +92,10 @@
             android:id="@+id/top_error_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:gravity="center"
-            android:text="Error occurred, please retry"
+            android:layout_marginHorizontal="20dp"
+            android:text="An error occurred, please check network connection and retry"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -91,10 +108,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="RETRY"
-            android:visibility="gone"
             android:layout_marginTop="5dp"
+            android:text="RETRY"
             android:textColor="@color/purple_500"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

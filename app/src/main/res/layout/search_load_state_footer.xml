@@ -12,9 +12,10 @@
         />
     <TextView
         android:id="@+id/footer_error_msg"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Erro while loading"
+        android:gravity="center"
+        android:text="An error occurred, please check network connection and retry"
         android:layout_marginHorizontal="20dp"
         />
     <Button

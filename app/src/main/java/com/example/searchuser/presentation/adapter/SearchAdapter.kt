@@ -19,7 +19,7 @@ class SearchAdapter(private val onClickListenerInterface: OnClickListener, priva
         fun bind(position: Int, context: Context){
             val search = differ.currentList[position]
             binding.searchItemLogin.text = search.login
-            binding.searchItemEventUrl.text = search.events_url
+            binding.searchItemType.text = search.type
             binding.searchItemImg.load(search.avatar_url){
                 placeholder(R.drawable.ic_launcher_foreground)
                 crossfade(true)

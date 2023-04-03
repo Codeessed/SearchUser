@@ -36,27 +36,35 @@
                 android:orientation="vertical"
                 android:padding="10dp"
                 >
+
+                <TextView
+                    android:id="@+id/search_item_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:ellipsize="end"
+                    android:text="User"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_weight="1"
+                    />
                 <TextView
                     android:id="@+id/search_item_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:text="Login"
-                    />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    />
-                <TextView
-                    android:id="@+id/search_item_event_url"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:maxLines="2"
                     android:ellipsize="end"
-                    android:text="adfs asdfsafadf asdfasdfa sdfasdfa adfasfas asfadf asdfasfa adfasf asdfasdfa adfasf afasfdf adfasdfa afasf asdfas"
+                    android:text="Login"
                     />
+
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>

@@ -14,7 +14,7 @@ class SearchLoadStateAdapter(private val retry:() -> Unit): LoadStateAdapter<Sea
             binding.apply {
                 footerPbar.isVisible = loadState is LoadState.Loading
                 footerErrorMsg.apply {
-                    text = (loadState as LoadState.Error).error.message
+//                    text = (loadState as LoadState.Error).error.message
                     isVisible = loadState !is LoadState.Loading
                 }
                 footerRetry.isVisible = loadState !is LoadState.Loading

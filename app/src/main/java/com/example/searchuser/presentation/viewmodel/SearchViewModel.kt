@@ -28,8 +28,19 @@ class SearchViewModel @Inject constructor(
         repositoryInterface.searchUsers(it).cachedIn(viewModelScope).asLiveData()
     }
 
+    private val _textState: MutableStateFlow<SearchEvents> = MutableStateFlow(SearchEvents.Empty)
+    val textState = _textState.asStateFlow()
+
+    sealed class SearchEvents{
+        object NotEmpty: SearchEvents()
+        object Empty: SearchEvents()
+    }
+
     fun searchUser(text: String){
+        _textState.value = SearchEvents.NotEmpty
         currentQuery.value = text
     }
+
+
 
 }

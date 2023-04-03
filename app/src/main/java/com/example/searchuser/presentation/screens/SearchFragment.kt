@@ -1,26 +1,17 @@
 package com.example.searchuser.presentation.screens
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.paging.LoadStates
-import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.searchuser.R
 import com.example.searchuser.data.response.Item
 import com.example.searchuser.databinding.FragmentSearchBinding
 import com.example.searchuser.presentation.adapter.SearchAdapter
@@ -31,11 +22,6 @@ import com.example.searchuser.utils.Extensions.observer
 import com.example.searchuser.utils.OnClickListener
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment: Fragment(), OnClickListener {
@@ -51,7 +37,6 @@ class SearchFragment: Fragment(), OnClickListener {
     private lateinit var searchPagedAdapter: SearchPagingAdapter
     private lateinit var searchButton: MaterialButton
     private var searchText: String? = null
-//    private lateinit var pagingAdapter: ImagesPagingAdapter
     private lateinit var searches: ArrayList<Item>
 
     override fun onCreateView(
@@ -74,45 +59,29 @@ class SearchFragment: Fragment(), OnClickListener {
 
         searchButton.setOnClickListener {
             searchUser()
-//            setPagedSearchRecycler()
-
-//            viewLifecycleOwner.lifecycleScope.launch {
-//                repeatOnLifecycle(Lifecycle.State.RESUMED){
-//                    if (!searchText.isNullOrEmpty()){
-//                        viewmodel.search.collectLatest { pagedSearchData ->
-//                            searchPagedAdapter.submitData(pagedSearchData)
-//                        }
-//                    }
-//                }
-//            }
         }
 
-        viewmodel.search.observe(viewLifecycleOwner){
-            searchPagedAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+        observer(viewmodel.textState){ textState ->
+            when(textState){
+                is SearchViewModel.SearchEvents.NotEmpty -> {
+                    binding.searchEmpty.isVisible = false
+                    viewmodel.search.observe(viewLifecycleOwner){ pagedItems ->
+                        searchPagedAdapter.submitData(viewLifecycleOwner.lifecycle, pagedItems)
+                    }
+                }
+                else -> {
+                    binding.searchEmpty.isVisible = true
+                }
+            }
         }
 
-//        observer(viewmodel.searchData){ searchData ->
-//            when(searchData){
-//                is SearchViewModel.SearchEvents.SearchSuccess -> {
-//                    Toast.makeText(requireContext(), "got to success", Toast.LENGTH_SHORT).show()
-////                    searchData.searchUserResponse.map {
-//                        searchPagedAdapter.submitData(searchData.searchUserResponse)
-////                    }
-//                }
-//                else -> {
-//                    Toast.makeText(requireContext(), "got to else", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
         searchPagedAdapter.addLoadStateListener { loadState ->
-//            setPagedSearchRecycler()
             binding.apply {
                 topPbar.isVisible = loadState.source.refresh is LoadState.Loading
                 topRetry.isVisible = loadState.source.refresh is LoadState.Error
                 searchRecycler.isVisible = loadState.source.refresh !is LoadState.Loading
                 topErrorMsg.apply {
                     isVisible = loadState.source.refresh is LoadState.Error
-//                    text = (loadState as LoadState.Error).error.message
                     setOnClickListener {
                         searchUser()
                     }
