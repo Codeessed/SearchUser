@@ -10,6 +10,7 @@ interface SearchApi {
     @GET("search/users")
     suspend fun searchUser(
         @Query("q") query: String,
+        @Query("order") order: String?,
         @Query("page") page: Int?,
         @Query("per_page") per_page: Int?,
     ): Response<SearchUserResponse>

@@ -1,11 +1,12 @@
 package com.example.searchuser.domain
 
-import com.example.searchuser.data.response.SearchUserResponse
-import com.example.searchuser.utils.Resource
+import androidx.paging.PagingData
+import com.example.searchuser.data.response.Item
+import kotlinx.coroutines.flow.Flow
 
 
 interface RepositoryInterface {
 
-    suspend fun searchUsers(query: String, per_page: Int?): Resource<SearchUserResponse>
+    fun searchUsers(query: String): Flow<PagingData<Item>>
 
 }
