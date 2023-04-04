@@ -5,7 +5,7 @@ A github_users_searcher project.
 ## About the project
 An android app that allow users to make a quick search of users on github with paginated responses as well as see the full details of each user.
 
-##Languages, libraries and tools used
+## Languages, libraries and tools used
 
 - [Kotlin](https://kotlinlang.org/)
 - [Paging Library](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
