@@ -53,6 +53,7 @@
             android:textColor="@color/black"
             android:gravity="center"
             android:textSize="18sp"
+            android:visibility="gone"
             android:layout_marginHorizontal="20dp"
             android:text="Input search query and click the search button to show results"
             app:layout_constraintBottom_toBottomOf="parent"

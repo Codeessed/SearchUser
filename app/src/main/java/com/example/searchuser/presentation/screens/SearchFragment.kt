@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.searchuser.data.response.Item
@@ -38,6 +39,7 @@ class SearchFragment: Fragment(), OnClickListener {
     private lateinit var searchButton: MaterialButton
     private var searchText: String? = null
     private lateinit var searches: ArrayList<Item>
+    private lateinit var pagees: PagingData<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,6 +62,9 @@ class SearchFragment: Fragment(), OnClickListener {
         searchButton.setOnClickListener {
             searchUser()
         }
+        binding.topRetry.setOnClickListener {
+            searchUser()
+        }
 
         observer(viewmodel.textState){ textState ->
             when(textState){
@@ -80,12 +85,7 @@ class SearchFragment: Fragment(), OnClickListener {
                 topPbar.isVisible = loadState.source.refresh is LoadState.Loading
                 topRetry.isVisible = loadState.source.refresh is LoadState.Error
                 searchRecycler.isVisible = loadState.source.refresh !is LoadState.Loading
-                topErrorMsg.apply {
-                    isVisible = loadState.source.refresh is LoadState.Error
-                    setOnClickListener {
-                        searchUser()
-                    }
-                }
+                topErrorMsg.isVisible = loadState.source.refresh is LoadState.Error
 
             }
         }
